@@ -1,2 +1,2 @@
-client_ip: "0.0.0.0"
-client_port: 59152
+client_ip: "192.168.1.150"
+client_port: 445
