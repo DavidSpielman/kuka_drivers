@@ -33,8 +33,8 @@ def launch_setup(context, *args, **kwargs):
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare('kuka_{}_support'.format(robot_family.perform(context))),
-                 "urdf", robot_model.perform(context) + ".urdf.xacro"]
+                [FindPackageShare("ocisam_bringup"),
+                 "urdf", "orbital_composites_workcell" + ".xacro"]
             ),
             " ",
             "use_fake_hardware:=",
@@ -49,7 +49,8 @@ def launch_setup(context, *args, **kwargs):
 
     joint_traj_controller_config = (get_package_share_directory('kuka_kss_rsi_driver') +
                                     "/config/joint_trajectory_controller_config.yaml")
-
+    joint_state_broadcaster_config = (get_package_share_directory('kuka_kss_rsi_driver') +
+                                    "/config/joint_state_broadcaster_config.yaml")
     controller_manager_node = '/controller_manager'
 
     control_node = Node(
@@ -84,7 +85,7 @@ def launch_setup(context, *args, **kwargs):
         )
 
     controller_names_and_config = [
-        ("joint_state_broadcaster", []),
+        ("joint_state_broadcaster", joint_state_broadcaster_config),
         ("joint_trajectory_controller", joint_traj_controller_config),
     ]
 
@@ -104,7 +105,7 @@ def generate_launch_description():
     launch_arguments = []
     launch_arguments.append(DeclareLaunchArgument(
         'robot_model',
-        default_value='kr6_r700_sixx'
+        default_value='SNP ROS2 Control'
     ))
     launch_arguments.append(DeclareLaunchArgument(
         'robot_family',
