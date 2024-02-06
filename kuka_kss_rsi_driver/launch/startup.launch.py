@@ -105,7 +105,7 @@ def generate_launch_description():
     launch_arguments = []
     launch_arguments.append(DeclareLaunchArgument(
         'robot_model',
-        default_value='SNP ROS2 Control'
+        default_value='kr_10_r1100_2 '
     ))
     launch_arguments.append(DeclareLaunchArgument(
         'robot_family',
